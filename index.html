@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <Input type="text" id="name"></Input>
+    </form>
+    <div id="resultbox"></div>
+
+    <script>
+        const input = document.getElementById("name");
+        const result = document.getElementById("result");
+
+        input.addEventListener("input", (event) => {
+            const str = event.target.value; 
+            const xmlhttp = new XMLHttpRequest();
+
+            document.querySelectorAll(".result").forEach(obj1 => {
+                obj1.remove();
+            });
+            
+            xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    const response = xmlhttp.responseText;
+                    let temp = JSON.parse(response);
+                    temp.forEach(obj => {
+                        const result = document.createElement("p");
+                        result.classList.add("result");
+                        result.textContent = obj["name"];
+                        document.getElementById("resultbox").appendChild(result);
+                    });
+                }
+            };
+
+
+            xmlhttp.open("GET", "Ajaxtest.php?data=" + str, true);
+            xmlhttp.send();
+        });
+    </script>
+</body>
+</html>
