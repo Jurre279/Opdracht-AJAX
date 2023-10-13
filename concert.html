@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="resultbox"></div>
+    <script>
+        const input = document.getElementById("name");
+        const result = document.getElementById("result");
+
+        // input.addEventListener("input", (event) => {
+        //     const str = event.target.value; 
+        //     const xmlhttp = new XMLHttpRequest();
+
+        //     document.querySelectorAll(".result").forEach(obj1 => {
+        //         obj1.remove();
+        //     });
+
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    const response = xmlhttp.responseText;
+                    const responseObject = JSON.parse(response);
+                    responseObject["concerten"].forEach(obj => {
+                        console.log(obj);
+                        const result = document.createElement("p");
+                        const result1 = document.createElement("p");
+                        const result2 = document.createElement("p");
+                        const result3 = document.createElement("p");
+                        const br = document.createElement("br");
+                        result.classList.add("result");
+                        result1.classList.add("result");
+                        result2.classList.add("result");
+                        result3.classList.add("result");
+                        result.textContent = obj["artiest"];
+                        result1.textContent = obj["stad"];
+                        result2.textContent = obj["zaal"];
+                        result3.textContent = obj["tijd"];
+                        document.getElementById("resultbox").append(result,result1,result2,result3,br);
+                    });
+                }
+            };
+
+
+            xmlhttp.open("GET", "data.json", true);
+            xmlhttp.send();
+    </script>
+</body>
+</html>
