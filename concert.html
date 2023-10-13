@@ -11,14 +11,6 @@
         const input = document.getElementById("name");
         const result = document.getElementById("result");
 
-        // input.addEventListener("input", (event) => {
-        //     const str = event.target.value; 
-        //     const xmlhttp = new XMLHttpRequest();
-
-        //     document.querySelectorAll(".result").forEach(obj1 => {
-        //         obj1.remove();
-        //     });
-
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
